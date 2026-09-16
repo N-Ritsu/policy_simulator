@@ -1,0 +1,23 @@
+・ローカルLLM実行基盤
+Ollama(汎用)
+llama-cpp-python(軽量)
+SGLang(JSON特化)
+上記を比較検討
+
+※その他LLM実行基盤が検討から外れた理由
+vLLM: 開発環境にNVIDIA GPUがない
+ONNX Runtime: 対応環境の制約が大きく、配布に向かない
+
+
+・LLMモデル
+Qwen3.8-27B(高精度)
+Gemma 4(高精度)
+Llama 4 Scout(軽量)
+上記を比較検討
+(ローカルLLMでは対応しきれない箇所が発生した場合、クラウドLLMの使用も視野)
+
+・言語
+Python
+
+・フレームワーク
+Streamlit

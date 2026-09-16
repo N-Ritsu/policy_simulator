@@ -1,0 +1,21 @@
+{
+  "positive_impacts": [
+    {
+      "description": "保育所増設による女性の労働参加率の向上", // ①良い影響
+      "target_indicators": ["birth_rate", "gdp", "tax_revenue"], // ②影響が及ぶ指標3つ
+      "peak_year": 5, // ③ピーク（正規分布の平均μ：例は5年後）
+      "duration": "long" // ④期間のばらつき（short, medium, long から選択、σに該当）
+    },
+    // ... これが3セット続く
+  ],
+  "negative_impacts": [
+    {
+      "description": "大規模な財政出動による国債残高の急増", // ①悪い影響
+      "target_indicators": ["national_debt", "currency_value", "inflation_rate"], 
+      "peak_year": 1, // すぐに出る（μ=1）
+      "duration": "short" // 短期集中的に打撃（σを小さくする）
+    },
+    // ... これが3セット続く
+  ]
+}
+
