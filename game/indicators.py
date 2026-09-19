@@ -97,10 +97,11 @@ class ModeDef:
     key: str
     label: str
     description: str
+    scenario_context: str  # AIに渡す時代背景・前提条件(政策の受け取られ方や規模感の判断材料)
     start_year: int  # 開始時の西暦
     duration_years: int
     initial_values: dict[str, float]
-    victory_conditions: dict[str, float]  # 指標 >= (higher_is_better) / <= (逆) を満たすべき水準
+    victory_conditions: dict[str, float]  # 30年経過時点で全て満たすべき水準(higher_is_better なら以上、逆なら以下)
     failure_conditions: dict[str, float]  # いずれか1つでも越えたら即ゲームオーバー
 
 
@@ -122,6 +123,20 @@ BUBBLE_MODE = ModeDef(
         "1988年、資産価格が高騰する好景気の絶頂。このまま崩壊させず、"
         "軟着陸させながら健全な成長へ導けるか。"
     ),
+    scenario_context=(
+        "【時代】1988年(昭和63年)の日本。バブル景気のただ中で、株価・地価が急騰している。\n"
+        "【経済・財政】超低金利(公定歩合は歴史的な低水準)と円高(プラザ合意後)を背景に、"
+        "企業も個人も資金が潤沢で、不動産・株式への投機的な資金流入が続いている。"
+        "貿易黒字が大きく、対米貿易摩擦が政治問題化している。"
+        "国の財政は「財政再建」が課題とされ、国債残高の削減が目標に掲げられている。\n"
+        "【社会・人々の意識】終身雇用・年功序列が前提の社会で失業への不安は小さく、"
+        "「一億総中流」意識が強い。専業主婦世帯が多く、女性の就労や育児を支える制度は未整備。"
+        "高齢化は将来の課題として意識され始めたばかりで、少子化はまだ大きな社会問題として認識されていない。\n"
+        "【技術・産業】製造業(自動車・家電・半導体)が世界的に強く、日本の技術力は世界トップクラスと自負されている。"
+        "インターネットや携帯電話は一般に普及しておらず、パソコン・ワープロの時代である。\n"
+        "【ゲームの目標】この好景気を崩壊(バブル崩壊とその後の長期停滞)させずに軟着陸させ、"
+        "30年後まで、成長・雇用・財政・国民生活・出生率を健全に両立させること。"
+    ),
     start_year=1988,
     duration_years=30,
     initial_values=_fill_defaults({
@@ -136,10 +151,13 @@ BUBBLE_MODE = ModeDef(
         "foreign_reserve": 90,
     }),
     victory_conditions={
-        "gdp_growth_rate": 1.5,
-        "unemployment_rate": 5.0,  # 以下であること(failure/higher_is_better=Falseなので下回ればOK)
-        "national_debt": 600.0,   # 以下
-        "national_satisfaction": 65.0,
+        "gdp": 850.0,
+        "gdp_growth_rate": 3.0,
+        "unemployment_rate": 2.5,
+        "national_debt": 300.0,
+        "national_satisfaction": 80.0,
+        "stock_market_index": 420.0,
+        "birth_rate": 1.9,
     },
     failure_conditions={
         "gdp_growth_rate": -6.0,      # これを下回ったら破綻
@@ -155,6 +173,21 @@ MODERN_MODE = ModeDef(
         "2000年、長期停滞の入り口。失われた技術的優位を取り戻し、"
         "再び世界有数の技術大国として返り咲けるか。"
     ),
+    scenario_context=(
+        "【時代】2000年の日本。バブル崩壊後の「失われた10年」の終盤で、長期停滞から抜け出せずにいる。\n"
+        "【経済・財政】不良債権問題と1990年代後半の金融危機を経て金融機関は慎重な姿勢が続き、"
+        "政策金利は歴史的な低水準でデフレ懸念がある。景気対策で国債残高が急増しており、"
+        "財政健全化と景気刺激の板挟みになっている。\n"
+        "【社会・人々の意識】就職氷河期で若年層の雇用が不安定化し、非正規雇用が増え、"
+        "終身雇用への信頼が揺らいでいる。将来不安から家計は貯蓄志向が強く、消費は低迷している。"
+        "少子高齢化が顕在化し(出生率は1.4を下回る)、年金・医療への不安が高まっている。"
+        "政治・行政への不信感が強い。\n"
+        "【技術・産業】インターネットと携帯電話が急速に普及し始め、米国ではITブームが起きている一方、"
+        "日本のIT化・デジタル化は出遅れている。半導体や家電など日本の製造業は、"
+        "韓国・台湾・中国などの新興勢力の追い上げを受けて競争力が低下しつつある。\n"
+        "【ゲームの目標】不況を跳ね除け、30年後までに再び世界有数の技術大国として返り咲くこと"
+        "(技術競争力・デジタル化・経済成長・国民満足度・財政・出生率を両立させる)。"
+    ),
     start_year=2000,
     duration_years=30,
     initial_values=_fill_defaults({
@@ -169,10 +202,13 @@ MODERN_MODE = ModeDef(
         "disaster_resilience": 55, "foreign_reserve": 350,
     }),
     victory_conditions={
-        "tech_competitiveness_index": 80.0,
-        "digitalization_index": 80.0,
-        "gdp_growth_rate": 2.0,
-        "national_satisfaction": 70.0,
+        "tech_competitiveness_index": 92.0,
+        "digitalization_index": 92.0,
+        "gdp_growth_rate": 3.0,
+        "gdp": 900.0,
+        "national_satisfaction": 80.0,
+        "national_debt": 550.0,
+        "birth_rate": 1.9,
     },
     failure_conditions={
         "gdp_growth_rate": -6.0,

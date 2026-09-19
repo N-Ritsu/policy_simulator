@@ -4,7 +4,8 @@
       "description": "保育所増設による女性の労働参加率の向上", // ①良い影響
       "target_indicators": ["birth_rate", "gdp", "tax_revenue"], // ②影響が及ぶ指標3つ
       "peak_year": 5, // ③ピーク（正規分布の平均μ：例は5年後）
-      "duration": "long" // ④期間のばらつき（short, medium, long から選択、σに該当）
+      "duration": "long", // ④期間のばらつき（short, medium, long から選択、σに該当）
+      "magnitude": 4 // ⑤インパクトの大きさ＝山自体の大きさ（面積。1:微小 ～ 3:標準 ～ 5:甚大。durationとは独立）
     },
     // ... これが3セット続く
   ],
@@ -13,9 +14,11 @@
       "description": "大規模な財政出動による国債残高の急増", // ①悪い影響
       "target_indicators": ["national_debt", "currency_value", "inflation_rate"], 
       "peak_year": 1, // すぐに出る（μ=1）
-      "duration": "short" // 短期集中的に打撃（σを小さくする）
+      "duration": "short", // 短期集中的に打撃（σを小さくする）
+      "magnitude": 3 // 打撃の大きさは標準的
     },
     // ... これが3セット続く
-  ]
+  ],
+  "overall_review": "保育所増設は中長期の出生率と税収を押し上げる一方、財政負担が短期的に重い。総じて長期投資型の政策と言える。" // ユーザーに提示する政策への総評（最後に出力）
 }
 
